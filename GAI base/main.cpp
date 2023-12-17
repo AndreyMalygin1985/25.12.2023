@@ -29,22 +29,17 @@ class GaiDatabase
 
     Node* insertNode(Node* node, const string& nomer, const string& zalet) {
         if (node == nullptr) {
-            // Создаем новый узел, если дерево пустое
             Node* newNode = new Node(nomer);
             newNode->zalet.push_back(zalet);
             return newNode;
         }
-        // Сравниваем номер автомашины с ключом текущего узла
         if (nomer < node->Nomer) {
-            // Переходим в левое поддерево
             node->left = insertNode(node->left, nomer, zalet);
         }
         else if (nomer > node->Nomer) {
-            // Переходим в правое поддерево
             node->right = insertNode(node->right, nomer, zalet);
         }
         else {
-            // Номер автомашины уже существует, добавляем правонарушение в список
             node->zalet.push_back(zalet);
         }
         return node;
@@ -55,20 +50,16 @@ class GaiDatabase
             return;
         }
 
-        // Распечатываем данные левого поддерева
         showInOrder(node->left);
 
-        // Распечатываем номер автомашины
         cout << "Номер автомашины: " << node->Nomer << endl;
 
-        // Распечатываем данные по правонарушениям
         cout << "Правонарушения: ";
         for (const auto& zalet : node->zalet) {
             cout << zalet << " ";
         }
         cout << endl;
 
-        // Распечатываем данные правого поддерева
         showInOrder(node->right);
     }
 
